@@ -23,17 +23,17 @@ class MarkerService {
         northeast: LatLng(northeastLat, northeastLon));
   }
 
-  // Marker createMarkerFromPlace(Place place, bool center) {
-  //   var markerId = place.name;
-  //   if (center) markerId = 'center';
+  Marker createMarkerFromPlace(Place place, bool center) {
+    var markerId = place.name;
+    if (center) markerId = 'center';
 
-  //   return Marker(
-  //       markerId: MarkerId(markerId),
-  //       draggable: false,
-  //       visible: (center) ? false : true,
-  //       icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
-  //       infoWindow: InfoWindow(title: place.name, snippet: place.vicinity),
-  //       position:
-  //           LatLng(place.geometry.location.lat, place.geometry.location.lng));
-  // }
+    return Marker(
+        markerId: MarkerId(markerId),
+        draggable: false,
+        visible: (center) ? false : true,
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+        infoWindow: InfoWindow(title: place.name, snippet: place.vicinity),
+        position:
+            LatLng(place.geometry.location.lat, place.geometry.location.lng));
+  }
 }

@@ -90,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
       _formKey.currentState.save();
 
       List<dynamic> items =
-          await Provider.of<PlacesService>(context, listen: false).nearbyPlaces(
+          await Provider.of<ApplicationBloc>(context, listen: false).nearbyPlaces(
         // nearby,
         radius,
         latlon,
@@ -330,26 +330,42 @@ class _HomeScreenState extends State<HomeScreen> {
                 //           fontSize: 20.0, fontWeight: FontWeight.bold),
                 //     ),
                 //   ),
-                Consumer<PlacesService>(
-                    // stream: null,
-                    builder: (context, data,_) {
-                  return Container(
+                // Consumer<PlacesService>(
+                //     // stream: null,
+                //     builder: (context, data,_) {
+                //   return Container(
+                //     height: 170.0,
+                //     padding: EdgeInsets.symmetric(vertical: 10),
+                //     child: ListView.builder(
+                //       scrollDirection: Axis.horizontal,
+                //       itemBuilder: (context, index) {
+                //         return HorizontalList(
+                //           image_location: data.items[index]["icon"],
+                //           image_caption: data.items[index]["name"],
+                //           image_vicinity: data.items[index]["vicinity"],
+                //           rating: data.items[index]["rating"].toString(),
+                //         );
+                //       },
+                //       itemCount: data.items.length,
+                //     ),
+                //   );
+                // }),
+                Container(
                     height: 170.0,
                     padding: EdgeInsets.symmetric(vertical: 10),
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         return HorizontalList(
-                          image_location: data.items[index]["icon"],
-                          image_caption: data.items[index]["name"],
-                          image_vicinity: data.items[index]["vicinity"],
-                          rating: data.items[index]["rating"].toString(),
+                          image_location: applicationBloc.items[index]["icon"],
+                          image_caption: applicationBloc.items[index]["name"],
+                          image_vicinity: applicationBloc.items[index]["vicinity"],
+                          rating: applicationBloc.items[index]["rating"].toString(),
                         );
                       },
-                      itemCount: data.items.length,
+                      itemCount: applicationBloc.items.length,
                     ),
-                  );
-                }),
+                  )
               ],
             ),
       bottomNavigationBar: BottomNavigationBar(
