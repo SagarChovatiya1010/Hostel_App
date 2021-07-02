@@ -25,7 +25,7 @@ class HorizontalList extends StatelessWidget {
             padding: const EdgeInsets.all(2.0),
             child: Container(
               width: 360,
-              height: 240.0,
+              height: 270.0,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

@@ -56,8 +56,15 @@ class ApplicationBloc with ChangeNotifier {
 
   setSelectedLocation(String placeId) async {
     var sLocation = await placesService.getPlace(placeId);
+    print("setselected ni andar");
+    // print(sLocation);
+    // print(sLocation.name);
+    // print(selectedLocation.);
     selectedLocation.add(sLocation);
+    // print(selectedLocation.stream.listen((event) {print("pachi");print(event.name);}));
     selectedLocationStatic = sLocation;
+    searchResults = null;
+    // notifyListeners();
     markers.add(Marker(
       markerId: MarkerId(placeId),
       infoWindow: InfoWindow(
@@ -66,7 +73,9 @@ class ApplicationBloc with ChangeNotifier {
       position: LatLng(
           sLocation.geometry.location.lat, sLocation.geometry.location.lng),
     ));
-    searchResults = null;
+    // print("setselected ni andar");
+    // print(markers);
+    //print(selectedLocation.stream.listen((event) {print("stream ni andar");print(event.name);}));
     notifyListeners();
   }
 

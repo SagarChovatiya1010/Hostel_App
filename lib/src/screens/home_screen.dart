@@ -39,17 +39,21 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
+    // print("kyare kyare");
     final applicationBloc =
         Provider.of<ApplicationBloc>(context, listen: false);
-
     //Listen for selected Location
     locationSubscription =
         applicationBloc.selectedLocation.stream.listen((place) {
       if (place != null) {
+        print("init ni andar");
+        print(place.name);
         _locationController.text = place.name;
         _goToPlace(place);
-      } else
+      } else{
+        print("init ni andar");
         _locationController.text = "";
+      }
     });
 
     applicationBloc.bounds.stream.listen((bounds) async {
@@ -80,6 +84,8 @@ class _HomeScreenState extends State<HomeScreen> {
     // bool isValid = _formKey.currentState.validate();
     var latlon = Provider.of<ApplicationBloc>(context, listen: false)
         .selectedLocationStatic;
+    print("latlon joto");
+    print(latlon);
     if (isValid) {
       _formKey.currentState.save();
 
@@ -148,28 +154,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Column(
                         children: [
-                          // ListTile(
-                          //   //contentPadding: EdgeInsets.all(<some value here>),//change for side padding
-                          //   title: Row(
-                          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          //     children: <Widget>[
-                          //       RaisedButton(
-                          //         onPressed: () {},
-                          //         child: Text("Clear"),
-                          //         color: Colors.blueAccent,
-                          //         textColor: Colors.white,
-                          //       ),
-                          //       RaisedButton(
-                          //         onPressed: () {},
-                          //         child: Text("Filter"),
-                          //         color: Colors.blueAccent,
-                          //         textColor: Colors.white,
-                          //       ),
-                          //     ],
-                          //   ),
-                          // ),
+                          
                           Container(
-                            height: 290.0,
+                            height: 310.0,
                             child: GoogleMap(
                               mapType: MapType.normal,
                               myLocationEnabled: true,
@@ -179,8 +166,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                     applicationBloc.currentLocation.longitude),
                                 zoom: 14,
                               ),
-                              onMapCreated: (GoogleMapController controller) {
+                              onMapCreated: (GoogleMapController controller){
                                 _mapController.complete(controller);
+                               
                               },
                               markers: Set<Marker>.of(applicationBloc.markers),
                             ),
@@ -344,7 +332,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 //   ),
                 Consumer<PlacesService>(
                     // stream: null,
-                    builder: (context, data, _) {
+                    builder: (context, data,_) {
                   return Container(
                     height: 170.0,
                     padding: EdgeInsets.symmetric(vertical: 10),
@@ -381,6 +369,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _goToPlace(Place place) async {
+    print("google maps ni andae");
+    print(place.name);
     final GoogleMapController controller = await _mapController.future;
     controller.animateCamera(
       CameraUpdate.newCameraPosition(
